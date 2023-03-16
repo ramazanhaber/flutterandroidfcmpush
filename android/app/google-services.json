@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "393170624185",
+    "project_id": "genelproje-6ec6c",
+    "storage_bucket": "genelproje-6ec6c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393170624185:android:d2672f73d1e4bc65a3c568",
+        "android_client_info": {
+          "package_name": "com.ramzey.flutterandroidfcmpush"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393170624185-g8055n36t4qbjic77ar7u3m17a0t6ele.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYsjaHwpZ-Blu_-lG4RlgdZbQCdN1WhV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "393170624185-g8055n36t4qbjic77ar7u3m17a0t6ele.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
