@@ -12,21 +12,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
 
-
-  @override
-  Future<void> initState() async {
+@override
+  void initState() {
     // TODO: implement initState
     super.initState();
-
-
     FirebaseMessaging.instance.getToken().then((value) {
       Sabitler.token=value!;
       setState(() {
 
       });
     });
-
-
 
   }
   @override
