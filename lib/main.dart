@@ -1,9 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutterandroidfcmpush/homepage.dart';
-import 'package:flutterandroidfcmpush/sabitler.dart';
-import 'package:push_fire_notifications/pushnotification.dart';
+
+import 'LocalNotificationService.dart';
+
+Future<void> backgroundHandler(RemoteMessage message) async {
+  // print(message.data.toString());
+  // print(message.notification!.title);
+}
 
 Future<void> main() async {
 
@@ -11,6 +16,25 @@ Future<void> main() async {
 
   try{
     await Firebase.initializeApp();
+    FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+    LocalNotificationService.initialize();
+    //(sonradan eklendi) Update the iOS foreground notification presentation options to allow heads up notifications.
+    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+
+    );
+
+    var _messaging = FirebaseMessaging.instance;
+    NotificationSettings settings = await _messaging.requestPermission(
+        alert: true, badge: true, sound: true, provisional: false);
+
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      String? token = await _messaging.getToken();
+      print("IOS TOKEN : " + (token ?? ""));
+    }
+
   }catch(ex){
   }
 
@@ -23,39 +47,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  PushFireNotifications(
-      fcmTokenGet: (String token)  {
-        // Here we can get FCM token when app starts.
-        print("TOKEN : "+token); // her uygulamaya bir anahtar verir. bu anahtar sadece uygulama silinirse değişir. değişebileceği için her loginde k.ad şifre girdiğinde user tablosundaki token alanını her giriş yaptıgında güncelle
+    return  MaterialApp(
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
 
-        Sabitler.token=token;
-        //await Clipboard.setData(ClipboardData(text: token));
-
-      },
-      onNotification: (String payload) {
-        // This function trigger whenever notification occurs
-        // get data in payload
-        print("1 "+payload);
-      },
-      onTapNotification: (String payload) {
-        // This function use for on tap notification when app
-        // is running mode
-        print("2 "+payload);
-      },
-      onTapAppTerminatedNotification: (String payload) {
-        // This function use for on tap notification when
-        // app is terminated mode
-        print("3 "+payload);
-      },
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-
-          primarySwatch: Colors.blue,
-        ),
-        home:  HomePage(),
+        primarySwatch: Colors.blue,
       ),
+      home:  HomePage(),
     );
   }
 }
