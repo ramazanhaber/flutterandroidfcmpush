@@ -5,6 +5,7 @@ import 'package:flutterandroidfcmpush/homepage.dart';
 
 import 'LocalNotificationService.dart';
 
+@pragma('vm:entry-point')
 Future<void> backgroundHandler(RemoteMessage message) async {
   // print(message.data.toString());
   // print(message.notification!.title);

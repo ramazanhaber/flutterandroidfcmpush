@@ -15,10 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   void fcmRun() {
-
-
     /*
     // uygulama kapalı iken çalışacak metot
     FirebaseMessaging.instance.getInitialMessage().then(
@@ -27,27 +24,22 @@ class _HomePageState extends State<HomePage> {
       },
     );*/
 
-
-
-
     // 2. This method only call when App in forground it mean app must be opened
 // uygulama açıkken tıklanınca çalışan metot
     FirebaseMessaging.onMessage.listen(
-          (message) {
+      (message) {
         print("2-> FirebaseMessaging.instance.getInitialMessage()");
-        if(Platform.isAndroid){
+        if (Platform.isAndroid) {
           LocalNotificationService.createanddisplaynotification(message);
         }
       },
     );
 
-
     // 3. This method only call when App in background and not terminated(not closed)
     // uygulama açık ama arka plandayken çalışan metot
     FirebaseMessaging.onMessageOpenedApp.listen(
-          (message) {
+      (message) {
         print("3-> FirebaseMessaging.onMessageOpenedApp.listen");
-
       },
     );
 
@@ -61,40 +53,25 @@ class _HomePageState extends State<HomePage> {
 
       Clipboard.setData(ClipboardData(text: Sabitler.token));
 
-      setState(() {
-
-});
+      setState(() {});
     });
-
   }
 
-
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     fcmRun();
-
-    Future.delayed(Duration(seconds: 3)).then((value) {
-      setState(() {
-
-      });
-    });
-
-
-  /*
-    FirebaseMessaging.instance.getToken().then((value) {
-      Sabitler.token=value!;
-      setState(() {
-
-      });
-    });*/
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("FCM İOS İÇİN"),),
-        body: Container(child: Text(Sabitler.token),));
+        appBar: AppBar(
+          title: Text("FCM İOS İÇİN"),
+        ),
+        body: Container(
+          child: Text(Sabitler.token),
+        ));
   }
 }
