@@ -73,6 +73,7 @@ class _HomePageState extends State<HomePage> {
       });
     });
 
+
   /*
     FirebaseMessaging.instance.getToken().then((value) {
       Sabitler.token=value!;
