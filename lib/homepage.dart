@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterandroidfcmpush/sabitler.dart';
 
@@ -10,16 +11,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+
+
   @override
-  void initState() {
+  Future<void> initState() async {
     // TODO: implement initState
     super.initState();
 
-    Future.delayed(Duration(seconds: 3)).then((value) {
-     setState(() {
 
-     });
+    FirebaseMessaging.instance.getToken().then((value) {
+      Sabitler.token=value!;
+      setState(() {
+
+      });
     });
+
+
 
   }
   @override
