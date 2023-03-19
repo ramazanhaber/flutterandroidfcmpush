@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:push_fire_notifications/pushnotification.dart';
 
 Future<void> main() async {
@@ -21,9 +22,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  PushFireNotifications(
-      fcmTokenGet: (String token) {
+      fcmTokenGet: (String token) async {
         // Here we can get FCM token when app starts.
         print("TOKEN : "+token); // her uygulamaya bir anahtar verir. bu anahtar sadece uygulama silinirse değişir. değişebileceği için her loginde k.ad şifre girdiğinde user tablosundaki token alanını her giriş yaptıgında güncelle
+
+        await Clipboard.setData(ClipboardData(text: token));
+
       },
       onNotification: (String payload) {
         // This function trigger whenever notification occurs
