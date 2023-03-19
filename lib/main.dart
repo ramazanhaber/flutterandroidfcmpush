@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutterandroidfcmpush/homepage.dart';
 import 'package:flutterandroidfcmpush/sabitler.dart';
 import 'package:push_fire_notifications/pushnotification.dart';
 
@@ -53,9 +54,7 @@ class MyApp extends StatelessWidget {
 
           primarySwatch: Colors.blue,
         ),
-        home:  Scaffold(appBar: AppBar(title: Text("FCM 2"),),
-        body: Container(child: Text("Sadece Android FCM PUSH"),),
-        ),
+        home:  HomePage(),
       ),
     );
   }
