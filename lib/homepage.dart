@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutterandroidfcmpush/sabitler.dart';
 
 import 'LocalNotificationService.dart';
@@ -57,6 +58,12 @@ class _HomePageState extends State<HomePage> {
     FirebaseMessaging.instance.getToken().then((value) {
       print('firebaseToken $value');
       Sabitler.token = value!;
+
+      Clipboard.setData(ClipboardData(text: Sabitler.token));
+
+      setState(() {
+
+});
     });
 
   }

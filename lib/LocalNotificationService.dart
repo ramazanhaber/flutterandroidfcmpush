@@ -6,19 +6,36 @@ class LocalNotificationService {
   static final FlutterLocalNotificationsPlugin _notificationsPlugin =
   FlutterLocalNotificationsPlugin();
 
+  static get onDidReceiveLocalNotification => null;
+
   static void initialize() {
     try{
       // initializationSettings  for Android
-      const InitializationSettings initializationSettings =
-      InitializationSettings(
-        android: AndroidInitializationSettings("@mipmap/ic_launcher"),
+
+
+      const AndroidInitializationSettings androidInitializationSettings =
+      AndroidInitializationSettings("@mipmap/ic_launcher");
+
+      IOSInitializationSettings iosInitializationSettings =
+      IOSInitializationSettings(
+        requestAlertPermission: true,
+        requestBadgePermission: true,
+        requestSoundPermission: true,
+        onDidReceiveLocalNotification: onDidReceiveLocalNotification,
       );
 
-      _notificationsPlugin.initialize(
-        initializationSettings,
-        onSelectNotification: (String? id) async {
-        },
+      final InitializationSettings settings = InitializationSettings(
+        android: androidInitializationSettings,
+        iOS: iosInitializationSettings,
       );
+
+       _notificationsPlugin.initialize(
+        settings,
+         onSelectNotification: (String? id) async {
+      },
+      );
+
+
     }catch(ex){
       print("hst "+ex.toString());
     }
