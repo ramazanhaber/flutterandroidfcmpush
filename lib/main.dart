@@ -24,12 +24,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  PushFireNotifications(
-      fcmTokenGet: (String token) async {
+      fcmTokenGet: (String token)  {
         // Here we can get FCM token when app starts.
         print("TOKEN : "+token); // her uygulamaya bir anahtar verir. bu anahtar sadece uygulama silinirse değişir. değişebileceği için her loginde k.ad şifre girdiğinde user tablosundaki token alanını her giriş yaptıgında güncelle
 
         Sabitler.token=token;
-        await Clipboard.setData(ClipboardData(text: token));
+        //await Clipboard.setData(ClipboardData(text: token));
 
       },
       onNotification: (String payload) {
